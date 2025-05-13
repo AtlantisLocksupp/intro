@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Atlantis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #1a1a1a;
+            padding: 0.8rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #00ff88;
+        }
+
+        .navbar .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #00ff88;
+            text-shadow: 0 0 8px #00ff88;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #00ff88;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #00ff88;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00ff88;
+            text-shadow: 0 0 15px #00ff88;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 2rem 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #00ff88;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 8px #00ff88;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #00ff88;
+            text-align: center;
+        }
+
+        .service-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            color: #ff007a;
+        }
+
+        /* Telegram and Contact */
+        .contact-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #00ff88;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px #00ff88;
+        }
+
+        .contact-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: #00ff88;
+            text-decoration: none;
+            word-break: break-all;
+            font-size: 0.9rem;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Quotes */
+        .quotes-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .quote-card {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #ff007a;
+            text-align: center;
+            color: #ff007a;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Reviews */
+        .reviews-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #00ff88;
+            text-align: left;
+        }
+
+        .review-card h3 {
+            font-size: 1rem;
+            color: #00ff88;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .review-card .testimonial {
+            font-style: italic;
+            color: #ff007a;
+        }
+
+        /* Scammer Exposure */
+        .scammer-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid #ff007a;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .scammer-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #ff007a;
+        }
+
+        .scammer-details {
+            flex: 1;
+            text-align: center;
+        }
+
+        .scammer-details p {
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .scammer-details strong {
+            color: #ff007a;
+        }
+
+        /* MCQ Purchase Steps */
+        .mcq-steps ol {
+            list-style: decimal;
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .mcq-steps li {
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .mcq-steps a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        .mcq-steps a:hover {
+            text-decoration: underline;
+        }
+
+        /* Alert */
+        .alert {
+            position: fixed;
+            top: 60px;
+            /* Adjusted to appear below navbar */
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            padding: 1rem;
+            border: 1px solid #00ff88;
+            border-radius: 6px;
+            z-index: 2000;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 0 15px #00ff88;
+        }
+
+        .alert p {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert button {
+            background: #00ff88;
+            color: #0a0a0a;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .alert button:hover {
+            background: #00cc70;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #1a1a1a;
+            border-top: 1px solid #00ff88;
+            margin-top: 1.5rem;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background: #1a1a1a;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                border-bottom: 1px solid #00ff88;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .alert {
+                top: 50px;
+                /* Adjusted for mobile navbar height */
+            }
+        }
+
+        @media (min-width: 769px) {
+
+            .services-grid,
+            .contact-grid,
+            .quotes-grid,
+            .reviews-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .scammer-card {
+                flex-direction: row;
+                text-align: left;
+            }
+
+            .scammer-details {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 1.5rem 0.8rem;
+            }
+
+            .hero {
+                padding: 2rem 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.2rem;
+            }
+
+            .service-card,
+            .contact-card,
+            .quote-card,
+            .review-card {
+                padding: 0.8rem;
+            }
+
+            .scammer-card img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .alert {
+                top: 120px;
+                padding: 0.8rem;
+            }
+
+            .alert p {
+                font-size: 0.8rem;
+            }
+
+            .alert button {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Alert -->
+    <div class="alert" id="newAlert">
+        <p>New in 2025: Steps to purchase MCQs added!</p>
+        <button onclick="viewSteps()">View Steps</button>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Team Atlantis</div>
+        <div class="menu-toggle">☰</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#quotes">Quotes</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#scammers">Scammers</a></li>
+            <li><a href="#mcq-steps">Buy MCQ</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Team Atlantis</h1>
+        <p>Led by Solar, Locksupp, Pantom, and tech crew. We expose scammers and share knowledge anonymously.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>MCQ</h3>
+                <p>Can't talk here. Text us on mail or bot.</p>
+            </div>
+            <div class="service-card">
+                <h3>Internal</h3>
+                <p>Can't talk here. Text us on mail or bot.</p>
+            </div>
+            <div class="service-card">
+                <h3>Result</h3>
+                <p>Can't talk here. Text us on mail or bot.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2>Connect</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3>Telegram</h3>
+                <a href="https://t.me/msbtelicker" target="_blank">Team Atlantis</a>
+            </div>
+            <div class="contact-card">
+                <h3>Telegram Chat</h3>
+                <a href="https://t.me/msbtelickerchat" target="_blank">Team Atlantis Chat</a>
+            </div>
+            <div class="contact-card">
+                <h3>Bot</h3>
+                <a href="https://t.me/locksupxp_bot" target="_blank">t.me/locksupxp_bot</a>
+            </div>
+            <div class="contact-card">
+                <h3>Email</h3>
+                <a href="mailto:elliotladerson2121@proton.me">elliotladerson2121@proton.me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section id="quotes" class="section">
+        <h2>Quotes</h2>
+        <div class="quotes-grid">
+            <div class="quote-card">"If you didn't purchase our service, someone else will."</div>
+            <div class="quote-card">"In a world of 1s and 0s, knowledge is power."</div>
+            <div class="quote-card">"Hack the system, not the people."</div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="section">
+        <h2>Reviews (For Proof Join The TG group)</h2>
+        <div class="reviews-grid" id="reviewsContainer"></div>
+    </section>
+
+    <!-- Scammers Section -->
+    <section id="scammers" class="section">
+        <h2>Scammers</h2>
+        <div class="scammer-card">
+            <img src=".scammers/23611031056.png" alt="Scammer Image">
+            <div class="scammer-details">
+                <p><strong>Name:</strong>TUPE TEJAS BHAGINATH</p>
+                <p><strong>Mother's Name:</strong>SIMA (Waise Aapne Scam Karne Ki Sima Paar Krdi)</p>
+                <p><strong>DOB:</strong>2007-12-22</p>
+                <p><strong>Number:</strong>+91 7962754470</p>
+                <p><strong>Enrollment:</strong>23611031056</p>
+                <p><strong>Address:</strong>At Nandur, Taluka- Rahta</p>
+                <p><strong>Email:</strong>ramnathsarwar@gmail.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MCQ Purchase Steps -->
+    <section id="mcq-steps" class="section">
+        <h2>How to Buy an MCQ from Us</h2>
+        <div class="mcq-steps">
+            <ol>
+                <li><strong>Sign Up</strong><br>Register using this <a
+                        href="https://cryptpad.fr/form/#/2/form/view/VovebXRipfkvfAVQK9nDAV2tttrSn0ja3e31fVatPl8/"
+                        target="_blank">link</a>.</li>
+                <li><strong>Join Our Group</strong><br>Join our Telegram group: <a href="https://t.me/msbtelicker"
+                        target="_blank">@msbtelicker</a>.</li>
+                <li><strong>Contact Us</strong><br>Email <a
+                        href="mailto:elliotalderson2121@proton.me">elliotalderson2121@proton.me</a> with "Hi, I want to
+                    buy an MCQ."</li>
+                <li><strong>Wait for Our Update</strong><br>We’ll post in the Telegram group when MCQs are available.
+                </li>
+                <li><strong>Register on Our App</strong><br>We’ll send an app link. Sign up with your details.</li>
+                <li><strong>Learn How to Pay</strong><br>We’ll explain the easy payment process in the app.</li>
+                <li><strong>Get Access</strong><br>After payment, access your app dashboard.</li>
+                <li><strong>Score Big</strong><br>Use the MCQ to score 70/70 marks!</li>
+                <li><strong>Celebrate!</strong><br>Enjoy your success! 🎉</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Team Atlantis</p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navUl = document.querySelector('.navbar ul');
+
+        menuToggle.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+        });
+
+        // Scroll to MCQ steps and hide alert
+        function viewSteps() {
+            document.getElementById('mcq-steps').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('newAlert').style.display = 'none';
+        }
+
+        // Reviews JSON data
+        const reviews = [
+            {
+                anonymousName: "ShadowHacker",
+                subjectName: "EST",
+                semesterMarks: "92/100",
+                onlineSubjectMarks: "70/70",
+                testimonial: "Team Atlantis delivered! The MCQ was spot-on, and I aced my online exam. Highly recommend!"
+            },
+            {
+                anonymousName: "CyberGhost",
+                subjectName: "MAN",
+                semesterMarks: "90/100",
+                onlineSubjectMarks: "70/70",
+                testimonial: "Super reliable service. The process was smooth, and the results were worth it. Thanks, Atlantis!"
+            },
+            {
+                anonymousName: "NeonByte",
+                subjectName: "ETI, MAN",
+                semesterMarks: "95/100",
+                onlineSubjectMarks: "70/70",
+                testimonial: "Best decision ever. Scored full marks in my online subject. Team Atlantis is legit!"
+            }
+        ];
+
+        // Render reviews
+        const reviewsContainer = document.getElementById('reviewsContainer');
+        reviews.forEach(review => {
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            reviewCard.innerHTML = `
+                <h3>${review.anonymousName}</h3>
+                <p><strong>Semester Marks:</strong> ${review.semesterMarks}</p>
+                <p><strong>Subject Name:</strong> ${review.subjectName}</p>
+                <p><strong>Online Subject Marks:</strong> ${review.onlineSubjectMarks}</p>
+                <p class="testimonial">"${review.testimonial}"</p>
+            `;
+            reviewsContainer.appendChild(reviewCard);
+        });
+    </script>
+</body>
+
+</html>
